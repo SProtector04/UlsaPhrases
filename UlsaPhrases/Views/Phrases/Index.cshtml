@@ -15,18 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PhraseStatement)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhraseAuthor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhraseDedication)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhraseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhraseContext)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,18 +23,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(model => item.PhraseStatement)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.PhraseAuthor)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.PhraseDedication)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.PhraseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.PhraseContext)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

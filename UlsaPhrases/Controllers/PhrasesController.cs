@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UlsaPhrases.Models;
 using UlsaPhrases.Data;
+using Microsoft.AspNetCore.Authorization;
 
 public class PhrasesController : Controller
 {
@@ -26,9 +27,9 @@ public class PhrasesController : Controller
     }
 
     // POST: PHRASES/ShowSearchResults
-    public string ShowSearchResults(String SearchTerm)
+    public async Task<IActionResult> ShowSearchResults(string SearchTerm)
     {
-        return "You entered " + SearchTerm;
+        return View("Index",await _context.Phrase.Where(j=>j.PhraseStatement.Contains(SearchTerm)).ToListAsync());
     }
 
     // GET: PHRASES/Details/5
@@ -50,6 +51,7 @@ public class PhrasesController : Controller
     }
 
     // GET: PHRASES/Create
+    [Authorize]
     public IActionResult Create()
     {
         return View();
@@ -58,6 +60,7 @@ public class PhrasesController : Controller
     // POST: PHRASES/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Id,PhraseStatement,PhraseAuthor,PhraseDedication,PhraseDate,PhraseContext")] Phrase phrase)
@@ -72,6 +75,7 @@ public class PhrasesController : Controller
     }
 
     // GET: PHRASES/Edit/5
+    [Authorize]
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -90,6 +94,7 @@ public class PhrasesController : Controller
     // POST: PHRASES/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int? id, [Bind("Id,PhraseStatement,PhraseAuthor,PhraseDedication,PhraseDate,PhraseContext")] Phrase phrase)
@@ -123,6 +128,7 @@ public class PhrasesController : Controller
     }
 
     // GET: PHRASES/Delete/5
+    [Authorize]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -141,6 +147,7 @@ public class PhrasesController : Controller
     }
 
     // POST: PHRASES/Delete/5
+    [Authorize]
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int? id)
