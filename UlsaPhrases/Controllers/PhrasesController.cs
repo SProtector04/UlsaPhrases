@@ -19,6 +19,18 @@ public class PhrasesController : Controller
         return View(await _context.Phrase.ToListAsync());
     }
 
+    // GET: PHRASES/ShowSearchForm
+    public async Task<IActionResult> ShowSearchForm()
+    {
+        return View();
+    }
+
+    // POST: PHRASES/ShowSearchResults
+    public string ShowSearchResults(String SearchTerm)
+    {
+        return "You entered " + SearchTerm;
+    }
+
     // GET: PHRASES/Details/5
     public async Task<IActionResult> Details(int? id)
     {
